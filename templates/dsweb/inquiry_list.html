@@ -1,0 +1,33 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th>번호</th>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if inquiry_list %}
+        {% for inquiry in inquiry_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><a href="{% url 'dsweb:detail' inquiry.id %}">{{ inquiry.subject }}</a></td>
+            <td>{{ inquiry.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">질문이 없습니다.</td>
+        {% endif %}
+        </tbody>
+    </table>
+    <a href="{%url 'dsweb:inquiry_create' %}" class="btn btn-primary">
+            질문 등록하기
+    </a>
+</div>
